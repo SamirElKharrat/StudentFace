@@ -1,14 +1,5 @@
 import gradio as gr
-
-#func temporales
-def resumir(fichero, maxL):
-    return f"Resumen generado (máx {maxL} caracteres)."
-
-def traducir(idiomaIni, idiomaFin):
-    return f"Texto traducido de {idiomaIni} a {idiomaFin}."
-
-def preguntar(preguntaResumen, maxLPregunta):
-    return f"Respuesta corta (máx {maxLPregunta} palabras) para: {preguntaResumen}"
+import models as func
 
 
 
@@ -102,20 +93,20 @@ body {
                 
 
         btnFichero.click(
-              fn=resumir,
+              fn=func.summary,
               inputs=[fichero,maxL],
               outputs=[resumen]
         )
 
         btnTraduccion.click(
-              fn=traducir,
+              fn=func.translation,
               inputs=[resumen,idiomaIni,idiomaFin],
               outputs=[textoTraducido]
         )
 
         btnPregunta.click(
-              fn=preguntar,
-              inputs=[resumen,preguntaResumen,maxLPregunta],
+              fn=func.questionAnswer,
+              inputs=[resumen,preguntaResumen],
               outputs=[respuestaPregunta]
         )
 
