@@ -79,7 +79,6 @@ body {
 
                 gr.HTML("<h3>Pregunta sobre el texto</h3>")
                 preguntaResumen = gr.Text(label="Pregunta sobre el resumen")
-                maxLPregunta = gr.Slider(20,100,value=30,step=1,label="Máxima longitud de la respuesta resumida")
 
                 btnPregunta = gr.Button("Realizar pregunta")
 

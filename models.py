@@ -2,7 +2,6 @@
 Esta parte es la gestion de la llamada de distintos modelos
 
 Samir estuvo aqui
-Ian apesta
 """
 from transformers import pipeline
 import numpy as np
@@ -27,7 +26,7 @@ def summary(fichero, cantidad):
     else:
         pass
 
-    result = summarizer(texto, max_length=200, min_length=cantidad, do_sample=False) 
+    result = summarizer(texto, max_length=len(texto), min_length=cantidad, do_sample=False) 
     return result[0]["summary_text"]
 
 #Modelo de texto a audio (text-to-speech)
