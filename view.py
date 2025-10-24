@@ -14,7 +14,7 @@ body {
 
 #title {
     text-align: center;
-    color: #e10ee8;
+    color: #0d77b5;
     font-size: 2.4em;
     font-weight: 700;
     margin-top: 10px;
@@ -40,7 +40,7 @@ body {
 
 .column-box {
     flex: 1 1 48%;
-    background-color: #baa779;
+    background-color: #0d77b5;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
@@ -67,7 +67,7 @@ body {
             with gr.Column(elem_classes="column-box"):
                 gr.HTML("<h3>Resumen de fichero</h3>")
                 fichero = gr.File(label="Fichero a resumir")
-                maxL = gr.Slider(100, 1000, value=300, step=5, label="Máxima longitud del resumen.")
+                maxL = gr.Slider(50, 300, value=100, step=5, label="Máxima longitud del resumen.")
 
                 btnFichero = gr.Button("Subir fichero")
 
@@ -82,6 +82,10 @@ body {
                 maxLPregunta = gr.Slider(20,100,value=30,step=1,label="Máxima longitud de la respuesta resumida")
 
                 btnPregunta = gr.Button("Realizar pregunta")
+
+                gr.HTML("<h3>Audio</h3>")
+            
+                btnAudio = gr.Button("Generar audio")
 
 
             with gr.Column(elem_classes="column-box"):
@@ -108,6 +112,12 @@ body {
               fn=func.questionAnswer,
               inputs=[resumen,preguntaResumen],
               outputs=[respuestaPregunta]
+        )
+        
+        btnAudio.click(
+             fn=func.textSpeech,
+             inputs=[resumen],
+             outputs=[AudioDelResumen]
         )
 
 
