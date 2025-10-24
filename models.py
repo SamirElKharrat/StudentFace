@@ -6,16 +6,26 @@ Ian apesta
 """
 from transformers import pipeline
 import numpy as np
+from pypdf import PdfReader, errors
+
+
 
 
 #Modelo de Resumen de textos (Text Summarization)
-def summary(archivo, cantidad):
+def summary(fichero, cantidad):
 
     summarizer = pipeline("summarization", model="Falconsai/text_summarization")
 
+    print(fichero)
     #Recoger texto de ficheros
-    with open("ejemplo.txt", 'r', encoding='utf-8') as file:
-        texto = file.read()
+    try:
+        reader = PdfReader(fichero)
+        texto = reader.pages[0].extract_text()
+        print(texto)
+    except errors.PdfReadError:
+        return "Solo se aceptan Pdf's."
+    else:
+        pass
 
     result = summarizer(texto, max_length=200, min_length=cantidad, do_sample=False) 
     return result[0]["summary_text"]
