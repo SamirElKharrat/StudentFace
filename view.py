@@ -68,14 +68,15 @@ body {
                 gr.HTML("<h3>Resumen de fichero</h3>")
                 fichero = gr.File(label="Fichero a resumir")
                 maxL = gr.Slider(50, 300, value=100, step=5, label="Máxima longitud del resumen.")
-
-                btnFichero = gr.Button("Subir fichero")
-
                 gr.HTML("<h3>Traducción de texto</h3>")
+                traducir = gr.Checkbox(label= "¿Quieres traducir el texto?")
                 idiomaIni = gr.Dropdown(["Español","Inglés","Alemán"],label="Idioma del fichero entregado")
                 idiomaFin = gr.Dropdown(["Español","Inglés","Alemán"],label="Idioma a traducir")
 
-                btnTraduccion = gr.Button("Traducir Resumen")
+                btnFichero = gr.Button("Subir fichero")
+
+
+
 
                 gr.HTML("<h3>Pregunta sobre el texto</h3>")
                 preguntaResumen = gr.Text(label="Pregunta sobre el resumen")
@@ -90,21 +91,14 @@ body {
             with gr.Column(elem_classes="column-box"):
                 gr.HTML("<h3>Resultados</h3>")
                 resumen = gr.TextArea(label="Resumen")
-                textoTraducido = gr.TextArea(label="Texto traducido")
                 respuestaPregunta = gr.TextArea(label="Respuesta de la pregunta")
                 AudioDelResumen = gr.Audio(label="Audio del Resumen",type="numpy")
                 
 
         btnFichero.click(
               fn=func.summary,
-              inputs=[fichero,maxL],
+              inputs=[fichero,maxL,idiomaIni,idiomaFin, traducir],
               outputs=[resumen]
-        )
-
-        btnTraduccion.click(
-              fn=func.translation,
-              inputs=[resumen,idiomaIni,idiomaFin],
-              outputs=[textoTraducido]
         )
 
         btnPregunta.click(
